@@ -18,6 +18,11 @@ Mildenhall, B., Srinivasan, P. P., Tancik, M., Barron, J. T., Ramamoorthi, R., &
 11. [Positional encoding](#posenc)
 12. [Signed distance functions](#sdf)
 13. [Differentiable rasterizers](#diffrast)
+14. [Volumetric representation](#volrep)
+15. [Quadrature](#quadrature)
+16. [Stratified sampling](#sampling)
+17. [Alpha compositing (Porter-Duff) model](#pdc)
+18. [Lambertian objects](#lamb)
 
 
 ### 1. Continuous volumetric scene function <a name="cvsf"></a>
@@ -365,3 +370,159 @@ Differentiable rasterization has opened up new possibilities for deep learning a
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     allowfullscreen>
 </iframe>
+
+### 13. Volumetric representation <a name="volrep"></a>
+
+from ChatGPT, "Volumetric representation in 3D scenes is a method for encoding and storing three-dimensional data in a way that describes the spatial distribution of a particular property or attribute throughout a volume of space. This representation is used in various fields, including computer graphics, medical imaging, scientific simulations, and more. Volumetric data is particularly well-suited for capturing complex and detailed spatial information.
+
+Key aspects of volumetric representation in 3D scenes include:
+
+1. **Volume Elements (Voxels)**: In volumetric representation, the 3D space is discretized into a grid of volume elements, which are referred to as "voxels." Voxels are analogous to 2D pixels but exist in three dimensions. Each voxel corresponds to a small volume of space within the 3D scene.
+
+2. **Attribute Information**: For each voxel, one or more attributes or properties are stored. These attributes can represent a wide range of information, depending on the application. For example, in medical imaging, voxels can store information about tissue density or intensity, while in computer graphics, they may represent color, opacity, or other material properties.
+
+3. **Density and Scalar Values**: One common use of volumetric representation is to store scalar values at each voxel. These scalar values can represent physical quantities like temperature, pressure, or concentration, making volumetric data suitable for scientific simulations.
+
+4. **Volumetric Rendering**: Volumetric representation is often used for rendering 3D scenes, especially in the context of volumetric rendering. Volumetric rendering techniques use the information stored in voxels to generate 2D images that provide insights into the 3D volume. This is crucial in fields like medical imaging for visualizing internal structures.
+
+5. **3D Reconstruction**: Volumetric data is also used in 3D reconstruction from multiple 2D views or depth information. It allows for the creation of 3D models from a set of 2D images or depth maps.
+
+6. **Medical Imaging**: In medical imaging, volumetric data is essential for capturing detailed information about a patient's anatomy. CT (computed tomography) and MRI (magnetic resonance imaging) scans are common sources of volumetric data in the medical field.
+
+7. **Scientific Simulations**: Volumetric data is used to model physical phenomena in scientific simulations, such as fluid dynamics, weather modeling, and combustion simulations.
+
+8. **Augmented and Virtual Reality**: Volumetric data can be used in AR and VR applications to create immersive 3D environments. It provides rich spatial information for realistic interactions and visualizations.
+
+9. **Discretization and Resolution**: The quality of the volumetric representation depends on the resolution of the voxel grid. Higher resolutions capture finer details but require more memory and computational resources.
+
+Volumetric representation is a powerful and flexible way to capture 3D spatial data and is used across a wide range of applications where spatial information is crucial. It enables the visualization, analysis, and manipulation of complex 3D scenes and is an essential tool in fields that rely on spatial data."
+
+### 15. Quadrature <a name="quadrature"></a>
+
+from ChatGPT, "In mathematics, quadrature is a term that historically referred to various methods for calculating the area under a curve or the numerical approximation of definite integrals. The term "quadrature" is rarely used in modern mathematics and has largely been replaced with more specific and descriptive terminology, such as numerical integration or numerical methods for integration. Nevertheless, it's useful to understand the historical context and what quadrature originally referred to:
+
+1. **Numerical Integration**: Quadrature methods were developed as techniques for approximating definite integrals. The definite integral of a function f(x) over a specific interval [a, b] represents the area under the curve of the function within that interval. Numerical integration methods, including quadrature, are used to approximate this area when it is not analytically solvable.
+
+2. **Types of Quadrature**: Quadrature methods encompass a variety of techniques for numerical integration, including the trapezoidal rule, Simpson's rule, and Gaussian quadrature. These methods differ in how they approximate the integral, with varying levels of accuracy and efficiency.
+
+3. **Historical Significance**: Quadrature was a significant problem in mathematics, particularly in ancient Greece and during the time of the ancient mathematician Archimedes. Archimedes used a geometric approach to approximate the value of π by finding the area of a circle, which can be thought of as a quadrature problem. The term "quadrature" has historical ties to solving problems related to the measurement of areas and volumes.
+
+4. **Use in Numerical Analysis**: Even though the term "quadrature" is less commonly used today, the methods and principles behind quadrature remain important in numerical analysis. Numerical integration techniques are widely used for approximating integrals in scientific and engineering applications, including physics simulations, data analysis, and more.
+
+In summary, "quadrature" historically referred to techniques for approximating definite integrals, and it is a precursor to modern numerical integration methods. While the term itself is not as prevalent in contemporary mathematics, the principles and methods of quadrature are fundamental to numerical analysis and have numerous practical applications."
+
+### 16. Stratified sampling <a name="sampling"></a>
+
+from ChatGPT, "Stratified sampling is a statistical sampling technique used in research and data analysis to ensure that a sample drawn from a population is representative of the various subgroups or strata within that population. This method is particularly useful when the population can be divided into distinct groups or categories, and researchers want to make sure that each subgroup is adequately represented in the sample.
+
+Here's how stratified sampling works:
+
+1. **Dividing the Population into Strata**: The first step is to divide the population into mutually exclusive and exhaustive strata or groups. These strata are typically defined based on certain characteristics or attributes, such as age, gender, income, geographic location, or any other relevant factors.
+
+2. **Random Sampling within Each Stratum**: Within each stratum, random sampling is performed. This means that a random sample is drawn from each subgroup. The sample size from each stratum is often proportional to the size of that stratum relative to the entire population. In other words, larger strata contribute more samples, while smaller strata contribute fewer samples.
+
+3. **Combining the Samples**: Once samples are collected from each stratum, they are combined to create the overall sample for analysis. The resulting sample is a stratified sample.
+
+The main advantages of stratified sampling are:
+
+1. **Improved Representativeness**: Stratified sampling ensures that each subgroup of the population is represented in the sample, which makes the sample more representative of the entire population. This can lead to more accurate and reliable results.
+
+2. **Greater Precision**: By focusing on each stratum individually and appropriately allocating sample sizes, researchers can achieve greater precision and reduce sampling error.
+
+3. **Comparisons between Strata**: Researchers can compare and analyze different subgroups within the population with more confidence, as they know that each subgroup has been adequately sampled.
+
+Stratified sampling is commonly used in various fields, including market research, political polling, educational research, and scientific studies, where researchers want to ensure that their sample accurately reflects the diversity or stratification within the population of interest."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sYRUYJYOpG0?si=lF-L1-e4grj9Z2rm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 17. Alpha compositing (Porter-Duff) model <a name="pdc"></a>
+
+from ChatGPT, "Traditional alpha compositing, often referred to as the Porter-Duff compositing model, is a method used in computer graphics and image processing to combine multiple layers or images with transparency (alpha) information to create a single composited image. This method defines how the color and transparency of each pixel in a layer or image affect the final result when combined with other layers.
+
+The Porter-Duff compositing model was introduced by Thomas Porter and Tom Duff in 1984 and has since become a fundamental concept in computer graphics. It defines a set of basic compositing operations based on the alpha value (transparency) of each pixel. The model provides a way to express how to blend and combine pixels in a visually intuitive manner.
+
+The basic Porter-Duff compositing operations include:
+
+1. **Over**: This operation combines two images, one representing the source and the other the background. It respects the alpha (transparency) value of each pixel in the source image, blending it with the background image. The result is an image that appears on top of the background, respecting transparency.
+
+2. **In**: This operation takes the intersection of the source and background images, considering the alpha values. It results in an image where the source appears within the boundaries defined by the background's alpha values.
+
+3. **Out**: This operation is the opposite of "In." It results in an image where the source appears outside the boundaries defined by the background's alpha values.
+
+4. **Atop**: This operation combines the source and background, but the source is clipped to the alpha values of the background. The result is that the source is blended with the background, taking on the alpha values of the background.
+
+5. **XOR**: This operation combines the source and background, but the regions where they overlap are removed, creating a distinctive visual effect.
+
+6. **Plus**: This operation adds the color values of the source and the background, taking into account their alpha values.
+
+These basic compositing operations can be used to create a wide range of visual effects by controlling how layers with transparency are blended together. The Porter-Duff model provides a standardized way of specifying how these operations are applied to create complex composites in computer graphics and image editing software."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/atR7Mam1Yds?si=XiU5X8uBcjSatJOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 18. Adam optimizier <a name="adam"></a>
+
+from ChatGPT, "The Adam optimizer, short for Adaptive Moment Estimation, is a popular optimization algorithm used in training machine learning models, particularly in the context of deep learning and neural networks. It combines the advantages of two other optimization techniques: RMSprop (Root Mean Square Propagation) and momentum. Adam is known for its efficiency, fast convergence, and robustness across a wide range of deep learning tasks.
+
+Here are the key features and components of the Adam optimizer:
+
+1. **Adaptive Learning Rates**: Adam adjusts the learning rates dynamically for each parameter during training. It uses the moving averages of past gradients to compute a per-parameter learning rate. This adaptive learning rate helps improve the convergence of the optimization process and can prevent the model from getting stuck in local minima.
+
+2. **Momentum**: Adam includes a momentum term that helps accelerate convergence, especially when the gradient direction remains consistent. The momentum term, similar to the momentum optimizer, accumulates past gradients to give the optimization process an additional "push."
+
+3. **Root Mean Square Propagation (RMSprop)**: Adam uses an element-wise square root of the exponentially moving average of past squared gradients to normalize the updates for each parameter. This helps control the learning rate for each parameter separately.
+
+4. **Bias Correction**: To address bias issues in the early iterations of training, Adam applies bias correction to the moving averages of the gradients. This correction helps in stabilizing the optimization process at the beginning of training.
+
+The update step in Adam for each parameter θ is calculated as follows:
+
+1. Compute the current gradient g_t with respect to the loss function.
+
+2. Update the first moment estimate m_t and the second moment estimate v_t using exponential moving averages:
+
+  $$m_t = β1 * m_{t-1} + (1 - β_1) * g_t$$
+   $$v_t = β2 * v_{t-1} + (1 - β_2) * (g_t^2)$$
+
+   Here, $β_1$ and $β_2$ are hyperparameters (typically close to 1) controlling the exponential decay rates.
+
+3. Apply bias correction to the first and second moment estimates to mitigate bias issues:
+
+   $$m_t^{corrected} = m_t / (1 - β1^t)$$
+   $$v_t^{corrected} = v_t / (1 - β2^t)$$
+
+4. Compute the parameter update:
+
+   $$Δθ_t = -α * m_t^{corrected} / (sqrt(v_t^{corrected}) + ε)$$
+
+   Here, α is the learning rate, and ε is a small constant added to prevent division by zero.
+
+5. Update the model parameters: 
+
+    $$θ_{t+1} = θ_t + Δθ_t$$
+
+Adam is widely used because it tends to work well "out of the box" for a variety of deep learning tasks. However, the choice of hyperparameters, such as the learning rate and the β values, can still significantly impact the performance of the optimizer. Researchers have also proposed variations and improvements on Adam, such as AdaGrad, RMSprop, and Nadam, which have their own advantages in specific situations."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JXQT_vxqwIs?si=5DpIZZS3YyZuJ5U1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 18. Lambertian objects <a name="lamb"></a>
+
+from ChatGPT, "Lambertian objects, in the context of computer graphics and computer vision, are objects that exhibit a specific type of diffuse reflection behavior called Lambertian reflectance. Lambertian reflectance is an idealized model used to describe how light interacts with a surface when it scatters uniformly in all directions. Objects that follow Lambertian reflectance have certain distinctive characteristics:
+
+1. **Diffuse Reflection**: Lambertian objects exhibit purely diffuse reflection, meaning that incoming light is scattered uniformly in all directions. This is in contrast to specular reflection, where light is reflected in a focused manner, like a mirror.
+
+2. **Constant Brightness**: The brightness of Lambertian objects appears constant regardless of the viewing angle. This means that the color and intensity of the object's surface do not change when viewed from different angles.
+
+3. **Independence of Light Source**: Lambertian reflectance is independent of the light source direction. The object appears equally bright when illuminated from any direction, as long as it is illuminated by the same total amount of light.
+
+4. **No Glossiness or Shininess**: Unlike materials with specular highlights, Lambertian objects lack glossiness or shininess. They have a matte or flat appearance without distinct highlights or reflections.
+
+Lambertian reflectance is described by Lambert's cosine law, which states that the reflected radiance (brightness) from a Lambertian surface is directly proportional to the cosine of the angle between the surface normal (a vector perpendicular to the surface) and the incoming light direction. This relationship can be expressed as:
+
+$$L_o(v) = \rho \cdot \frac{\mathbf{n} \cdot \mathbf{l}}{\pi}$$
+
+Where:
+- $L_o(v)$ is the outgoing radiance in the view direction \(\mathbf{v}\).
+- $\rho$ is the surface reflectance (albedo), indicating how much of the incident light is reflected.
+- $\mathbf{n}$ is the normalized surface normal vector.
+- $\mathbf{l}$ is the normalized incoming light direction.
+
+Lambertian reflectance is a simple and widely used model in computer graphics and computer vision for various purposes, including rendering, lighting calculations, and estimating surface normals from shading. While many real-world surfaces do not perfectly follow Lambertian reflectance due to factors like specularity and surface properties, it serves as a foundational model for understanding how light interacts with surfaces and is used in various rendering and shading algorithms."
