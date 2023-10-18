@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" 
+content="width=device-width, 
+            initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+a { color: rgb(213, 213, 213);
+    text-decoration: none;
+}
+
+a:hover { color: white}
+
+body {
+font-family: Arial;
+background-color: rgb(39, 37, 37);
+color: rgb(213, 213, 213)
+}
+
+/* Add a black background color to the top navigation */
+.sidenav {
+  height: 100%;
+  width: 17%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(31, 29, 29);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: rgb(213, 213, 213);
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: white;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 25px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.squash {
+margin: 0px 18% 0px 18%;
+}
+
+iframe {
+    margin: 0px 0px 0px 0px;
+}
+
+</style>
+</head>
+<body">
+<a style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</a>
+
+<div id="main" class="squash">
+  <h2>Concept lookups</h2>
+  <p>These notes are created during my literature review of any concepts or phrases that are new to me. Most concepts have a description
+    generated from ChatGPT and a supplementary YouTube video for further explanation or examples.</p>
+  </p>
+</div>
+
+<div id="mySidenav" class="sidenav">
+    <a style="font-size:30px;cursor:pointer; position: right;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
+    <a href="#NeRF">10-16-23<br>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis<hr></a>
+</div>
+
+<hr style="margin: 0px 18% 0px 18%">
+<iframe name="NeRF" src="Literature Review/NeRF Representing Scenes as Neural Radiance Fields for View Synthesis.html" width="100%" height="725vh" frameborder="0"></iframe>
+<hr style="margin: 0px 18% 0px 18%">
+<br><br><br><br><br><br><br><br>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "17%";
+//   document.getElementById("main").style.marginLeft = "26%";
+//   document.getElementById("main").style.marginRight = "9%";
+
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "18%";
+  document.getElementById("main").style.marginRight = "18%";
+
+}
+</script>
+
+</body>
+</html> 
+
