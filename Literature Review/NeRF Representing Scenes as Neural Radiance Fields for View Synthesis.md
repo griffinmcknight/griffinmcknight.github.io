@@ -1,7 +1,6 @@
 **October 16, 2023**
 # Concept Lookups from *NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis*
 
-
 Mildenhall, B., Srinivasan, P. P., Tancik, M., Barron, J. T., Ramamoorthi, R., & Ng, R. (2020). NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis. Lecture Notes in Computer Science. https://doi.org/10.1007/978-3-030-58452-8_24
 
 ### Table of Contents
@@ -23,7 +22,34 @@ Mildenhall, B., Srinivasan, P. P., Tancik, M., Barron, J. T., Ramamoorthi, R., &
 16. [Stratified sampling](#sampling)
 17. [Alpha compositing (Porter-Duff) model](#pdc)
 18. [Lambertian objects](#lamb)
+19. [Peak signal-to-noise ratio (PSNR)](#psnr)
+20. [Structural similarity index (SSIM)](#ssim)
+21. [Learned perceptual image patch similarity (LPIPS)](#lpips)
+22. [Diffuse objects](#diffobj)
+23. [Forward facing captures](#forward)
+24. [Scene representation networks (SRN)](#srn)
+25. [Local Light Field Fusion (LLFF)](#llff)
+26. [Large 3D voxel grids](#l3vg)
+27. [ReLU activations (ReLU) / Activation functions](#relu)
+28. [Sigmoid activatoin](#sigmoid)
+29. [Normalized Device Coordinate (NDC)](#ndc)
+30. [Triangle rasterization](#trirast)
+31. ["Linear in disparity"](#lid)
+32. ["rays to map them from camera space to NDC space"](#raymap)
+33. [Original viewing frustum](#ovf)
+34. [Standard pinhole camera model](#spcm)
+35. [Texture-mapped meshes](#tmm)
 
+
+
+
+
+
+
+
+
+
+<hr>
 
 ### 1. Continuous volumetric scene function <a name="cvsf"></a>
 from ChatGPT, "A continuous volumetric scene function is a mathematical representation or model used in computer graphics and computer vision to describe the visual properties of a 3D scene in a continuous and volumetric manner. In simpler terms, it's a way to mathematically represent what a 3D scene looks like and how it behaves in a continuous and spatially coherent manner.
@@ -526,3 +552,407 @@ Where:
 - $\mathbf{l}$ is the normalized incoming light direction.
 
 Lambertian reflectance is a simple and widely used model in computer graphics and computer vision for various purposes, including rendering, lighting calculations, and estimating surface normals from shading. While many real-world surfaces do not perfectly follow Lambertian reflectance due to factors like specularity and surface properties, it serves as a foundational model for understanding how light interacts with surfaces and is used in various rendering and shading algorithms."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HPNW0we-ft0?si=t4vcMSnAkupQ3yoR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 19. Peak signal-to-noise ration (PSNR) <a name="psnr"></a>
+
+from ChatGPT, "PSNR stands for "Peak Signal-to-Noise Ratio." It is a metric used to measure the quality of reconstructed or compressed data, particularly in the context of digital image or video processing. PSNR is expressed in decibels (dB) and is used to quantify the amount of noise or distortion present in a signal when compared to the original, uncompressed signal.
+
+The formula for calculating PSNR is as follows:
+
+PSNR = 10 * log10((MAX^2) / MSE)
+
+Where:
+- PSNR is the Peak Signal-to-Noise Ratio in decibels.
+- MAX is the maximum possible pixel value (e.g., 255 for 8-bit images).
+- MSE is the Mean Squared Error, which is the average of the squared differences between corresponding pixels in the original and reconstructed images.
+
+A higher PSNR value indicates a higher quality image or video, as it means that the signal is closer to the original and contains less noise or distortion. Conversely, a lower PSNR value suggests a lower quality result with more noticeable artifacts.
+
+PSNR is widely used in image and video compression, transmission, and processing to assess the fidelity of the processed or compressed data. It provides a quantitative measure of how well the processed signal retains the information present in the original, making it a valuable tool for quality assessment in various multimedia applications."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mGPJBNsq7bA?si=VEqY4DHyN4LuE9lz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 20. Structural similarity index (SSIM) <a name="ssim"></a>
+
+from ChatGPT, "SSIM stands for "Structural Similarity Index." It is a widely used metric for assessing the structural similarity between two images. SSIM is designed to measure the perceived quality of an image by comparing the structural information in the original image to a distorted or compressed version of that image. It's particularly valuable for evaluating the visual quality of images after various image processing tasks, including compression, denoising, and resizing.
+
+The SSIM index is a decimal value that ranges from -1 to 1, with 1 indicating a perfect similarity between the two images. The SSIM formula takes into account three components: luminance, contrast, and structure.
+
+The formula for calculating SSIM is relatively complex, but it can be summarized as:
+
+SSIM(x, y) = (L(x, y) * C(x, y) * S(x, y))
+
+Where:
+- L(x, y) represents the luminance comparison, which measures the similarity in brightness or intensity between the two images.
+- C(x, y) represents the contrast comparison, which assesses the similarity in contrast between the two images.
+- S(x, y) represents the structure comparison, which examines the structural similarity between the two images.
+
+The product of these three components gives the overall SSIM index.
+
+A higher SSIM score indicates a higher degree of similarity and, therefore, better image quality. Conversely, a lower SSIM score indicates greater dissimilarity and a lower quality image.
+
+SSIM has become a standard method for evaluating image quality, and it is often preferred over other metrics like PSNR (Peak Signal-to-Noise Ratio) because it takes into account structural information and better aligns with human perception of image quality. Researchers and professionals in fields such as image and video processing, computer vision, and quality assessment frequently use SSIM to gauge the quality of their image processing algorithms and systems."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/699WYEx1qEg?si=BynbxOI7sh_4TKxu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 21. Learned perceptual image patch similarity (LPIPS) <a name="lpips"></a>
+
+from ChatGPT, "LPIPS stands for "Learned Perceptual Image Patch Similarity," and it is a metric used for assessing the perceptual similarity between two images. LPIPS is designed to capture the perceptual differences between images as perceived by humans, and it takes into account the visual features that are relevant to human perception.
+
+LPIPS is particularly useful in the field of computer vision and image processing for tasks such as image quality assessment, image generation, and image-to-image translation. Unlike traditional image quality metrics like PSNR (Peak Signal-to-Noise Ratio) and SSIM (Structural Similarity Index), LPIPS is based on deep neural networks and is learned from a large dataset of images. This makes it capable of capturing more complex and high-level perceptual differences between images.
+
+LPIPS operates by comparing image patches and their respective features extracted by a neural network. The differences in these features are used to calculate a similarity score. The final LPIPS score is an aggregate of the similarity scores computed over various image patches.
+
+LPIPS has gained popularity because it aligns more closely with human perception and can provide better assessments of image quality and similarity in tasks such as image super-resolution, style transfer, and image-to-image translation.
+
+The specific architecture and training of LPIPS models may vary, and there are different versions of LPIPS with improvements in accuracy and computational efficiency. Researchers and practitioners in computer vision and image processing often use LPIPS to evaluate and compare the quality and perceptual fidelity of various image processing and generation algorithms."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eMh9AcI77gg?si=7QhWcoNM9Bw4g-XO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 22. Diffuse objects <a name="diffobj"></a>
+
+from ChatGPT, "In the context of computer graphics, computer vision, and 3D rendering, "diffuse objects" refer to surfaces or materials that exhibit diffuse reflection. Diffuse reflection is a type of reflection where light is scattered uniformly in all directions when it interacts with the surface, as opposed to being reflected at a specific angle as in specular reflection.
+
+Key characteristics of diffuse objects include:
+
+1. Uniform Reflection: Diffuse objects appear equally bright from all viewing angles because light is scattered in all directions. This creates a soft and even appearance with no shiny spots or highlights.
+
+2. Lambertian Reflectance: The reflectance model commonly used to describe the behavior of diffuse objects is Lambertian reflectance. According to Lambert's law, the brightness of the surface is proportional to the cosine of the angle between the surface normal and the incoming light direction.
+
+3. Lack of Specular Highlights: Diffuse objects do not produce distinct specular highlights, which are the bright, concentrated reflections you might see on shiny or specular surfaces like metals or glass.
+
+Common examples of diffuse objects in the real world include materials like paper, fabric, unpolished wood, and some matte paints. These materials are said to have a diffuse or matte appearance because they scatter light evenly in all directions, resulting in a soft, non-reflective surface.
+
+In computer graphics and 3D rendering, simulating the appearance of diffuse objects is essential for creating realistic and natural-looking scenes. Understanding how light interacts with diffuse surfaces is a fundamental concept in rendering and shading, and it plays a crucial role in determining the overall visual quality of computer-generated images and animations."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EHn4asdgAos?si=KMLNP2g1_15bOteg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 23. Forward facing captures <a name="forward"></a>
+
+from ChatGPT, "The term "forward-facing captures" typically refers to images or data that are captured or recorded by a device, such as a camera, sensor, or scanner, in a direction that is oriented towards the front or forward direction of the device. These captures are taken from the perspective of what the device is directly facing.
+
+In various contexts, forward-facing captures can be important and serve different purposes:
+
+1. **Cameras and Photography:** In the context of cameras, forward-facing captures are images taken by the camera's primary lens or sensor, looking straight ahead. These images are what a person or a device in front of the camera would see.
+
+2. **Autonomous Vehicles:** In the field of autonomous vehicles, forward-facing cameras and sensors are essential for providing real-time data about the road and traffic conditions ahead. These captures help with tasks like lane-keeping, object detection, and collision avoidance.
+
+3. **Virtual Reality (VR) and Augmented Reality (AR):** In VR and AR applications, forward-facing captures are used to provide the user with a view that simulates the real-world perspective. This is especially important for creating immersive experiences where the user feels like they are in the environment.
+
+4. **Surveillance and Security:** Forward-facing cameras are often used in surveillance and security systems to monitor and record activities in a specific area or direction.
+
+5. **Navigation:** GPS and mapping systems in smartphones and other devices often use forward-facing captures to help users with turn-by-turn navigation and provide real-time images of the user's current location.
+
+In the context of different devices and applications, the term "forward-facing captures" is used to describe the data or imagery collected from the viewpoint directly in front of the device. This information is valuable for a wide range of applications, from photography to autonomous systems, navigation, and immersive technologies."
+
+### 24. Scene representation networks (SRN) <a name="srn"></a>
+
+from ChatGPT, "Scene Representation Networks (SRNs) are a class of neural network models used in computer vision and 3D scene understanding. These networks are designed to capture and represent complex 3D scenes, including their geometry and appearance, in a way that allows for various downstream tasks, such as object recognition, scene reconstruction, and view synthesis.
+
+Key characteristics and capabilities of Scene Representation Networks include:
+
+1. **3D Scene Understanding:** SRNs are focused on understanding and representing 3D scenes. They can model the geometry of the scene, including the shapes of objects and their positions in 3D space.
+
+2. **View Synthesis:** SRNs can synthesize novel views of a scene from different angles or viewpoints. This is particularly useful in applications like 3D scene reconstruction and virtual reality.
+
+3. **Multi-Modal Data:** SRNs can handle multi-modal data, including 2D images and 3D data, to create comprehensive scene representations. This makes them versatile for tasks that involve different types of sensory information.
+
+4. **Neural Rendering:** They often incorporate techniques from neural rendering, which is a field that leverages neural networks to generate images or views of scenes that may not exist in their entirety in the training data. This can involve techniques like novel view synthesis or texture mapping.
+
+5. **Application Areas:** SRNs are used in a variety of applications, including robotics, augmented reality, virtual reality, and autonomous navigation, where understanding and representing 3D scenes are essential.
+
+The specific architecture and methodology of SRNs can vary depending on the application and the research or development work involved. Researchers in computer vision and 3D scene understanding continue to explore and develop SRN models to advance the state-of-the-art in 3D scene representation, rendering, and related fields."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wbbfK06xzbw?si=4DObyaI48OkcEkNo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 25. Local Light Field Fusion (LLFF) <a name="llff"></a>
+
+from ChatGPT, "Local Light Field Fusion is a computational photography technique used to enhance the quality of images captured in a light field photography setup. Light field photography involves capturing both the intensity and direction of light rays at every point in space within a scene. This rich information allows for various post-capture manipulations and effects, including refocusing, depth estimation, and the creation of synthetic views.
+
+Local Light Field Fusion specifically focuses on the process of combining or fusing the captured information from a light field into a single image, which may involve various improvements or optimizations. This fusion process aims to produce a high-quality image that can be used for various purposes, such as creating a depth-of-field effect, enhancing image resolution, or generating a standard 2D image from the light field data.
+
+The fusion can involve several steps and considerations:
+
+1. **Depth-of-Field Control:** One common use of Local Light Field Fusion is to simulate depth-of-field effects. By selectively combining information from different rays within the light field, the photographer can control what is in focus and what is blurred in the final image.
+
+2. **Resolution Enhancement:** Combining information from multiple rays can lead to higher-resolution output images. This can be beneficial in creating images with more detail and sharpness.
+
+3. **Noise Reduction:** Light field data can be noisy due to the multiple perspectives captured. Fusion techniques can help reduce noise and improve the overall image quality.
+
+4. **Artifact Removal:** In the process of combining the light field data, certain artifacts, such as aliasing or moiré patterns, may be introduced. Local Light Field Fusion can be used to mitigate or remove these artifacts.
+
+5. **Synthetic View Generation:** The fusion process can also be used to generate novel views or perspectives of the scene, which can be valuable in applications like virtual reality or 3D modeling.
+
+The exact methods and algorithms used for Local Light Field Fusion can vary depending on the specific goals of the fusion process and the available computational resources. Researchers and photographers continue to explore and develop techniques for harnessing the potential of light field photography and improving the quality and creative possibilities of the resulting images."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LY6MgDUzS3M?si=biQ0vfNr_aJRayx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 26. Large 3D voxel grids <a name="l3vg"></a>
+
+from ChatGPT, "A large 3D voxel grid is a data structure used to represent and store three-dimensional information in a discrete, grid-like format. Voxel stands for "volume element," and these grids are composed of small, regularly spaced cube-shaped units, similar to the pixels in a 2D image. However, in a 3D voxel grid, these units extend into three dimensions, forming a cube-like lattice in 3D space.
+
+Each individual cube in a 3D voxel grid is called a voxel and represents a small volume element within the 3D space. Voxel grids are commonly used in various fields, including computer graphics, computer-aided design, medical imaging, and scientific simulations. Here are some key features and applications of large 3D voxel grids:
+
+1. **Representation of 3D Space:** Voxel grids are used to represent objects, scenes, or structures in three dimensions. Each voxel can store various types of information, such as color, material properties, or density, depending on the application.
+
+2. **Volume Rendering:** In medical imaging and scientific visualization, large 3D voxel grids are used to represent volumetric data, such as CT scans or MRI images. This allows for rendering and analysis of 3D structures and internal features.
+
+3. **Computer Graphics:** In 3D computer graphics, voxel grids are used for representing objects, environments, or terrain. They can be used for techniques like voxel-based rendering and modeling.
+
+4. **Simulation:** Voxel grids are employed in physics simulations, such as fluid dynamics and finite element analysis, where they represent the 3D space for simulating physical phenomena.
+
+5. **Game Development:** Some video games use voxel grids to create destructible environments or block-based worlds, such as in voxel-based sandbox games like Minecraft.
+
+The size of a large 3D voxel grid can vary significantly, depending on the requirements of the specific application. Large grids may encompass vast 3D spaces, such as entire virtual worlds or detailed medical imaging volumes.
+
+Voxel grids provide a discrete representation of 3D space, allowing for efficient storage and processing of 3D data, and they are a fundamental data structure in fields that deal with 3D information and spatial analysis."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bfLFcBk1sBI?si=TgDAlqx9C5A4VeRg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 27. ReLU activations (ReLU) / Activation functions <a name="relu"></a>
+
+from ChatGPT, "In neural networks, an activation function is a mathematical function that determines the output of a neuron, which is a basic processing unit in the network. Neurons take in input values, perform computations, and produce an output that gets passed to the next layer of neurons. Activation functions introduce non-linearity to the network, allowing it to learn complex patterns and relationships in the data. They are crucial for the network to model real-world problems effectively.
+
+There are several types of activation functions used in neural networks, and they can be categorized into linear and nonlinear functions. Here are some common types:
+
+1. **Linear Activation Function (Identity Function):** This is the simplest activation function. It computes the output as a linear combination of the input, meaning it doesn't introduce any non-linearity. The output is proportional to the input. However, this type of activation is rarely used in hidden layers because it makes the entire network behave like a linear model.
+
+   Linear Activation: f(x) = x
+
+2. **Nonlinear Activation Functions:**
+
+   a. **Sigmoid Activation (Logistic Activation):** The sigmoid function maps input values to a range between 0 and 1, which can be interpreted as a probability. It's useful in the output layer of binary classification models.
+
+      Sigmoid Activation: f(x) = 1 / (1 + exp(-x))
+
+   b. **Hyperbolic Tangent (Tanh) Activation:** The tanh function maps input values to a range between -1 and 1. It is also used for hidden layers in neural networks.
+
+      Tanh Activation: f(x) = (exp(x) - exp(-x)) / (exp(x) + exp(-x))
+
+   c. **Rectified Linear Unit (ReLU) Activation:** ReLU is a popular nonlinear activation function. It returns the input value for positive inputs and outputs zero for negative inputs. This introduces non-linearity while being computationally efficient.
+
+      ReLU Activation: f(x) = max(0, x)
+
+These activation functions play a crucial role in the learning process of neural networks. They enable the network to approximate complex functions, learn meaningful features from the data, and make predictions or classifications.
+
+Now, focusing on ReLU (Rectified Linear Unit) activation, as mentioned earlier, it's a widely used activation function in neural networks due to its non-linearity and effectiveness in addressing vanishing gradient problems. It introduces non-linearity by outputting the input value for positive inputs and zero for negative inputs, making it computationally efficient and well-suited for training deep neural networks. This non-linearity helps the network learn and model complex patterns and relationships within the data.
+
+ReLU, which stands for Rectified Linear Unit, is an activation function commonly used in artificial neural networks and deep learning models. It's a simple, yet highly effective, nonlinear activation function that introduces non-linearity to the model. ReLU activation is particularly popular in various neural network architectures due to its ability to address the vanishing gradient problem, which can hinder the training of deep networks.
+
+The ReLU activation function is defined as follows:
+
+ReLU(x) = max(0, x)
+
+In this function:
+
+- If the input value (x) is positive, ReLU returns the input value as-is.
+- If the input value is negative, ReLU returns 0.
+
+Mathematically, this can be expressed as:
+
+ReLU(x) = {
+  x, if x > 0
+  0, if x <= 0
+}
+
+The key characteristics of ReLU activation include:
+
+1. **Non-linearity:** ReLU introduces non-linearity to the network, allowing it to model and approximate complex, nonlinear relationships in the data.
+
+2. **Sparsity:** ReLU activations are sparse, meaning that they activate only for positive values. This can lead to more efficient network training and reduced computational requirements.
+
+3. **Vanishing Gradient Mitigation:** Unlike some other activation functions like sigmoid or tanh, ReLU does not saturate for positive input values, mitigating the vanishing gradient problem and allowing for the training of deep neural networks.
+
+Despite its advantages, ReLU can also exhibit a problem called the "dying ReLU" problem. In some cases, neurons with ReLU activation can become inactive and output only zeros for all inputs, making them untrainable. Researchers have introduced variations of ReLU, such as Leaky ReLU, Parametric ReLU (PReLU), and Exponential Linear Unit (ELU), to address these issues and further improve the training and performance of neural networks. These variants aim to provide non-zero gradients for negative input values, ensuring that neurons continue to learn even during training."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/68BZ5f7P94E?si=12FwZQe3QcAc4iWI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 28. Sigmoid activatoin <a name="sigmoid"></a>
+
+from ChatGPT, "Sigmoid activation, often referred to as the sigmoid function or logistic activation, is a type of nonlinear activation function commonly used in artificial neural networks. It is specifically used to introduce non-linearity in the output of a neuron or node in a neural network. The sigmoid function maps input values to a range between 0 and 1, making it particularly useful in binary classification problems where the goal is to model probabilities.
+
+The mathematical expression for the sigmoid activation function is as follows:
+
+Sigmoid Activation: σ(x) = 1 / (1 + exp(-x))
+
+In this equation:
+
+- σ(x) represents the output of the sigmoid function.
+- x is the input value to the function.
+- "exp" stands for the exponential function.
+
+Key characteristics and applications of the sigmoid activation function include:
+
+1. **Output Range:** The sigmoid function outputs values in the range of 0 to 1. This output range can be interpreted as a probability, which is particularly valuable in binary classification tasks. A value close to 1 indicates high confidence in one class, while a value close to 0 indicates high confidence in the other class.
+
+2. **Sigmoid Curve:** The shape of the sigmoid curve is an S-shaped curve. It's monotonically increasing and differentiable, which facilitates gradient-based optimization during the training of neural networks.
+
+3. **Non-Linearity:** Sigmoid introduces non-linearity to the network. This non-linearity allows neural networks to learn complex patterns and relationships in the data, making it suitable for various problems beyond classification, such as feature learning.
+
+However, there are some considerations when using sigmoid activation:
+
+- **Vanishing Gradient:** In deep neural networks, the gradient of the sigmoid function can become very small for extreme input values (very positive or very negative), which can lead to the vanishing gradient problem, making training difficult. To address this issue, other activation functions like ReLU (Rectified Linear Unit) and its variants have become more popular in deep learning.
+
+- **Centered Output:** The sigmoid function produces centered outputs around 0.5, which may not be ideal in cases where the outputs need to cover a broader range. For instance, in regression problems, a different activation function like the hyperbolic tangent (tanh) may be preferred.
+
+Despite these limitations, the sigmoid activation function remains valuable in certain scenarios, especially in the output layer of binary classification models, where it's used to estimate probabilities and make decisions based on a threshold."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KOhbp3EIRlM?si=5ez8PBKLwXx3XzUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 29. Normalized Device Coordinate (NDC) <a name="ndc"></a>
+
+from ChatGPT, "Normalized Device Coordinates (NDC) is a coordinate system used in computer graphics to represent the geometry of objects within the viewing volume or frustum. NDC is a common intermediate step in the rendering pipeline of 3D graphics, occurring after the transformation of 3D world coordinates into a 2D projection, but before the final transformation into pixel coordinates on a screen.
+
+Here are the key characteristics of Normalized Device Coordinates:
+
+1. **Canonical Viewing Volume:** NDC is defined within a canonical viewing volume that ranges from -1 to 1 in all three dimensions: X, Y, and Z. In this volume, the origin (0, 0, 0) corresponds to the center of the viewing frustum.
+
+2. **Normalization:** The process of converting 3D world coordinates (often in a Cartesian coordinate system) into NDC involves dividing each coordinate by the appropriate scale factor to bring it into the -1 to 1 range. This is typically done for both X, Y, and Z coordinates, resulting in a normalized point in NDC.
+
+3. **Homogeneous Coordinates:** NDC is often represented using homogeneous coordinates, which means that the coordinates are expressed as (X, Y, Z, W), where W is a scaling factor. In NDC, W is typically set to 1, so the coordinates are effectively (X, Y, Z, 1).
+
+4. **Clipping and Projection:** Objects and parts of objects that fall outside the -1 to 1 range in NDC are typically clipped, meaning they are discarded or transformed into smaller pieces that fit within the viewing volume. This clipping process ensures that only visible objects are rendered.
+
+5. **Depth Information:** The Z-coordinate in NDC represents the depth of a point in the viewing volume. Values closer to -1 are nearer to the viewer, while values closer to 1 are farther away.
+
+6. **Screen Space Transformation:** After the NDC stage, further transformation is applied to convert NDC coordinates into screen or pixel coordinates, taking into account the dimensions and resolution of the output display.
+
+Normalized Device Coordinates are an essential concept in computer graphics as they provide a standardized way to represent the visible geometry within the viewing frustum, making it easier to perform rendering operations like shading, lighting, and texturing. The NDC space serves as a common reference frame for rendering systems and graphics hardware."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ck1SH7oYRFM?si=RoFjd1c1HI3tf6bC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 30. Triangle rasterization <a name="trirast"></a>
+
+from ChatGPT, "The triangle rasterization pipeline, often referred to as the rasterization stage, is a fundamental component of the graphics rendering process in a computer graphics system, such as a graphics processing unit (GPU). It's responsible for converting geometric primitives, typically triangles, into individual pixels on the screen or image plane. The entire process can be broken down into several stages:
+
+1. **Vertex Transformation:** The pipeline begins with the transformation of vertices from their original world or object space into normalized device coordinates (NDC). This transformation involves operations like modeling transformations, view transformations, and perspective division.
+
+2. **Clipping:** Before rasterization, vertices and primitives that are outside the viewing frustum (defined by NDC volume) are clipped or discarded. This ensures that only visible portions of the primitives are processed further.
+
+3. **Triangle Setup:** Once the vertices have been transformed and clipped, the pipeline determines the parameters needed to interpolate data across the triangle's surface. This includes calculating gradients for attributes like color, texture coordinates, and depth.
+
+4. **Scan Conversion:** This stage involves converting the triangle from its continuous, 2D representation into a set of discrete pixels (samples) that cover the triangle's surface. Each pixel within the triangle's bounding box is evaluated to determine whether it falls inside the triangle, and if it does, attributes are interpolated across the pixel.
+
+5. **Attribute Interpolation:** For each pixel within the triangle, the values of attributes (e.g., color, texture coordinates, depth) are interpolated based on the gradient values determined during the triangle setup stage.
+
+6. **Depth Test:** The depth values of each pixel are compared to the existing depth values in the frame buffer. If the new depth value is closer to the viewer, the pixel's attributes (e.g., color) are updated. This process ensures that only the visible surfaces of objects are drawn.
+
+7. **Alpha Blending and Fragment Operations:** After depth testing, pixel values are processed for alpha blending, which allows for the mixing of transparent or translucent objects. Fragment operations like blending and anti-aliasing may also be applied.
+
+8. **Frame Buffer:** The final pixel values are written to the frame buffer, which represents the image or scene as seen from the camera or viewer's perspective. This frame buffer can be displayed on a screen or further processed for additional rendering stages.
+
+The triangle rasterization pipeline is essential for rendering 3D scenes and objects on a 2D display. It forms the core of real-time graphics rendering in video games, 3D modeling software, and various other applications that require the conversion of 3D geometry into 2D images."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/k5wtuKWmV48?si=2wBwe2pk0bboGj3c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 31. "Linear in disparity" <a name="lid"></a>
+
+from ChatGPT, "In the context of computer vision and stereo vision, "linear in disparity" refers to the relationship between depth or disparity values and the corresponding image coordinates in a scene. Disparity, in this context, represents the difference in the horizontal positions of corresponding points in the left and right images of a stereo pair and is used to calculate depth information.
+
+When a relationship is described as "linear in disparity," it means that the depth or disparity values change linearly with respect to the position in the image. This implies that, for small disparities, the depth can be approximated as a linear function of disparity, which simplifies the stereo vision process.
+
+For example, if the disparity between two points in the left and right images is D pixels, and the baseline (the distance between the camera positions for the left and right images) is B meters, then the depth (Z) of the point can be estimated as follows in a linear relationship:
+
+Z = (B * focal length) / D
+
+In this equation:
+
+- Z is the depth of the point in the scene.
+- B is the baseline, representing the distance between the two camera positions.
+- The focal length represents the camera's focal length in pixels.
+
+This linear relationship between depth and disparity holds when the baseline is small relative to the focal length and the depth variation in the scene is also relatively small.
+
+Understanding this linear relationship is fundamental for tasks such as stereo vision, 3D reconstruction, and depth mapping in computer vision applications. It simplifies the process of estimating the depth information from stereo images and provides a basis for generating 3D reconstructions from 2D images."
+
+### 32. "rays to map them from camera space to NDC space" <a name="raymap"></a>
+
+from ChatGPT, "The phrase "rays to map them from camera space to NDC space" describes a critical process in computer graphics and computer vision, particularly in rendering and 3D scene representation. Here's a more detailed explanation of each part of the phrase:
+
+1. **Rays:** In the context of computer graphics and computer vision, "rays" typically refer to lines or vectors that are used to represent the paths of light or the lines of sight from a camera or observer to points in a 3D scene. Rays are essential for tasks like rendering and 3D reconstruction because they help determine what is visible from the camera's perspective.
+
+2. **Map:** In this context, "map" means to transform or convert data from one coordinate system to another. It involves taking the information associated with the rays (such as their positions and directions) and re-representing it in a different coordinate system.
+
+3. **Camera Space:** "Camera space" refers to a coordinate system or 3D space that is centered around the camera's viewpoint. The camera's position is usually located at the origin, and the optical axis (the direction the camera is pointing) often aligns with the Z-axis. In camera space, the positions and directions of rays are described relative to the camera.
+
+4. **NDC Space:** "NDC" stands for Normalized Device Coordinates, and it is a standardized coordinate system used in computer graphics to represent the geometry of objects and scenes within the viewing frustum or volume. In NDC space, the viewing volume is typically defined within a cube or rectangular volume ranging from -1 to 1 along the X, Y, and Z axes. NDC space is used for consistency in rendering and further computational steps.
+
+The process of "mapping rays from camera space to NDC space" involves taking rays that originate from the camera's perspective and transforming their positions and directions so that they are represented within the NDC coordinate system. This mapping is essential for consistency and alignment between the camera's viewpoint, the scene geometry, and the subsequent rendering or computational steps that take place in NDC space.
+
+In summary, this process is a fundamental step in rendering and 3D computer vision applications, ensuring that the data and rays are in the same coordinate system, allowing for accurate rendering, visualization, and computation of 3D scenes."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pThw0S8MR7w?si=-2MJLLxybY5-QbLS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 33. Original viewing frustum <a name="ovf"></a>
+
+from ChatGPT, "An "original viewing frustum" typically refers to the initial or unaltered viewing frustum in computer graphics, which represents the volume or space within which a camera or viewer can see objects in a 3D scene. The term "frustum" describes the shape of the viewing volume, which is pyramid-like with its top cut off, resulting in a truncated pyramid.
+
+Here are the key components and characteristics of the original viewing frustum:
+
+1. **Geometry:** The original viewing frustum is defined by six planes that form the boundaries of the volume. These planes are typically defined as the near plane, far plane, left plane, right plane, top plane, and bottom plane. The near plane is the closest to the camera, while the far plane is the farthest from the camera. The other four planes define the sides of the frustum.
+
+2. **Field of View (FOV):** The shape and size of the frustum depend on the camera's field of view. A wider field of view results in a larger frustum, allowing the camera to capture a wider area of the 3D scene.
+
+3. **Aspect Ratio:** The aspect ratio of the frustum is determined by the dimensions of the output display (e.g., screen or viewport). It influences the shape of the frustum, ensuring that objects are not distorted when projected onto the screen.
+
+4. **Depth Range:** The frustum has a depth range defined by the near and far planes. Objects that fall within this depth range are considered within the camera's view, and those outside it are not visible.
+
+The original viewing frustum serves as a fundamental concept in computer graphics and rendering. It helps determine which objects in a 3D scene are visible from the camera's perspective and need to be rendered. It also plays a crucial role in tasks like view frustum culling, which optimizes rendering by discarding objects that are entirely outside the frustum and thus not visible to the camera.
+
+In the rendering pipeline, objects are typically transformed into the viewing frustum's space and then projected onto the 2D screen space for rendering. The original viewing frustum provides the initial boundaries for this projection, and it can be adjusted or transformed as needed for various rendering and visualization tasks."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GqEP79loyQE?si=2Tj-b2pjmLmjfg38" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 34. Standard pinhole camera model <a name="spcm"></a>
+
+from ChatGPT, "The standard pinhole camera model is a simplified mathematical representation of how a camera captures images of the 3D world in 2D space. It provides a basic framework for understanding the fundamental concepts of perspective and camera geometry in computer vision and computer graphics.
+
+The model assumes a simple, idealized camera with the following components:
+
+1. **Pinhole:** At the center of the camera, there is a tiny aperture or pinhole through which light rays from the 3D scene pass to form an image on the camera's imaging plane. This pinhole is the "lens" of the idealized camera and serves as the point where all incoming rays converge.
+
+2. **Imaging Plane:** The imaging plane is positioned some distance behind the pinhole and acts as the surface on which the image is formed. It's often referred to as the image sensor or film plane in real cameras.
+
+3. **Focal Length (f):** The distance from the pinhole to the imaging plane is known as the focal length (denoted as "f" in the model). It determines the perspective and magnification of objects in the image.
+
+Key principles of the standard pinhole camera model include:
+
+- **Perspective Projection:** The model is based on the principle of perspective projection, where light rays from the 3D scene converge at the pinhole and then project onto the imaging plane. This projection causes objects closer to the camera to appear larger in the image, and those farther away to appear smaller.
+
+- **Inverted Image:** The resulting image is an inverted representation of the scene, meaning that objects appear upside down in the image compared to their orientation in the 3D world. This inversion occurs because the light rays cross at the pinhole before reaching the imaging plane.
+
+- **Pinhole Camera Equation:** The pinhole camera model is described by the pinhole camera equation, which relates the 3D coordinates of a point in the scene (X, Y, Z) to its 2D image coordinates (x, y) using focal length and the camera's position and orientation.
+
+- **No Lens Distortion:** The standard pinhole camera model does not account for lens distortion, which is a real-world phenomenon in cameras. Lens distortion can cause image imperfections like radial distortion and tangential distortion.
+
+While the standard pinhole camera model is a simplification and idealization of real camera systems, it forms the foundation for understanding how cameras capture images and the principles of geometric projection. It is a fundamental concept in computer vision, computer graphics, and photogrammetry, serving as a starting point for more complex camera models and calibration techniques used in various applications."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_EhY31MSbNM?si=RvJtcyma66zq8qup" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### 35. Texture-mapped meshes <a name="tmm"></a>
+
+from ChatGPT, "Texture-mapped meshes are 3D models used in computer graphics and 3D computer visualization where a texture or image is applied to the surface of a 3D mesh to provide details, colors, or patterns. The process of applying a 2D image to a 3D object is known as "texture mapping." Texture mapping allows you to make 3D models appear more realistic, detailed, and visually appealing.
+
+Here are the key components and concepts related to texture-mapped meshes:
+
+1. **3D Mesh:** A 3D mesh is a collection of vertices, edges, and faces that defines the geometry and structure of a 3D object. These meshes are used to create a wide range of 3D models, from simple shapes to complex characters and environments.
+
+2. **Texture Mapping:** Texture mapping involves taking a 2D image (the texture) and applying it to the surface of a 3D mesh. The process includes mapping the 2D image onto the 3D geometry in a way that aligns the image with the object's surface. This provides the appearance of detail, color, or patterns on the object.
+
+3. **Texture Coordinates (UV Mapping):** To apply a 2D texture to a 3D mesh, each vertex of the mesh is associated with specific texture coordinates, typically denoted as (u, v). These coordinates determine how the 2D image is wrapped or projected onto the 3D surface. The process of assigning texture coordinates to vertices is known as UV mapping.
+
+4. **Types of Textures:** Textures can vary in content and purpose. They can be simple color maps to add color and shading to the object, normal maps to simulate surface details and lighting effects, bump maps to create the illusion of small-scale surface features, or even image-based textures that depict complex patterns or scenes.
+
+5. **Realism and Detail:** Texture mapping enhances the realism of 3D models. It allows artists and developers to add intricate details, such as skin pores, fabric patterns, or weathering, to make objects appear more lifelike.
+
+6. **Efficiency:** Texture mapping is an efficient way to add visual detail to 3D models without increasing the complexity of the geometry. This is crucial for real-time applications like video games and interactive simulations.
+
+7. **Shader Programs:** In modern graphics programming, texture-mapped meshes are often used in conjunction with shader programs to apply complex materials and lighting effects to the textured surfaces, further enhancing the realism of the 3D objects.
+
+Texture-mapped meshes are a fundamental concept in computer graphics and 3D rendering, playing a crucial role in creating visually appealing and realistic 3D scenes and objects. They are used in a wide range of applications, from video games and animation to architectural visualization and virtual reality."
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HRNIWK5CCak?si=B8_1CrfpA70qNANR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
