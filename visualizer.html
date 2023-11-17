@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>3D Visualization</title>
+  <title>Point Cloud Visualizer</title>
   <!-- Include Three.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Include PLYLoader script -->
@@ -36,8 +36,11 @@
 <body style="background-color: rgb(39, 37, 37);">
   <!-- Container for the point cloud visualization -->
     <h1 style="color:rgb(213, 213, 213); text-align: center; padding: 5px 0px 0px 0px;">
-        3D Visualization
+        Point Cloud Visualizer
     </h1>
+    <p style="color:rgb(213, 213, 213); text-align: center; padding: 5px 0px 0px 0px;">
+      Currently, only .ply files are supported.
+    </p>
       <!-- File input for uploading PLY file -->
     <input type="file" id="fileInput" accept=".ply" style="display: block; margin: 20px auto; color:rgb(213, 213, 213);">
   <div id="pointCloudContainer">
