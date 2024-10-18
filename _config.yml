@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Discover insights into AI, machine learning, and data science with Griffin McKnight. 
   Featuring articles, projects, and research on the latest trends and technologies.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://griffinmcknight.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  griffinmcknight
 
 # Build settings
