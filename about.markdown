@@ -7,7 +7,7 @@ permalink: /about/
 My name is Griffin McKnight, and I am currently a graduate research assistant for 
 Dr. Balakrishna Gokaraju at North Carolina Agricultural and Technical State University, 
 where I am a second-year Ph.D. student in Computational Data Science and Engineering. 
-I have a particular interest in the researching novel data preprocessing and representation 
+I have a particular interest in researching novel data preprocessing and representation 
 techniques to enhance machine learning model performance. My expertise encompasses 
 applied machine learning, deep learning, and AI across a wide range of problems.
 
