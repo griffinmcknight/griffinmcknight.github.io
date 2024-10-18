@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Welcome to My Blog!"
-date: 2024-10-18
+date: 2024-10-18 14:30:00 -0400
 categories: [Introduction, AI, Machine Learning, Data Science, Personal]
 ---
 
