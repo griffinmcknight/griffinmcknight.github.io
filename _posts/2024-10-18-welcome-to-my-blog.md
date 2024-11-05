@@ -2,21 +2,20 @@
 layout: post
 title: "Welcome to My Blog!"
 date: 2024-10-18 14:30:00 -0400
-categories: [Introduction, AI, Machine Learning, Data Science, Personal]
+categories: [Introduction]
 ---
 
-Welcome to my blog! My name is Griffin McKnight, and I am excited to share my journey into the world of artificial intelligence, machine learning, data science, and statistics with you.
+## About Me
 
-In this space, I will be posting about various topics, including:
+My name is Griffin McKnight and I am a lifelong learner excited to share my journey into the world of artificial intelligence, machine learning, mathematics, and STEM theory with you. I want to use this space to archive computational conecpts, ideas, and theories for myself and the community.
 
-- **AI & ML**: Exploring the latest trends, techniques, and technologies in artificial intelligence and machine learning.
-- **Data Science**: Insights into data analysis, visualization, and the importance of data in decision-making processes.
-- **Projects**: Showcasing my projects and experiments in the fields of AI and data science, including challenges and successes.
-- **Publications**: Sharing my research findings and articles that I find interesting and relevant.
+## Objectives
 
-This blog is not just a collection of articles; it's a platform for learning, sharing, and engaging with the community. I hope to inspire others to explore these fields and contribute to the ever-evolving world of technology.
+This blog is not just a collection of topical articles; it's a platform for sharing what I am learning, thinking about, and actively working on with those around me. I hope to inspire others to explore the fields of data science and mathematics by showcasing thought-provoking material and contribute to the ever-evolving world of technology.
 
-Thank you for joining me on this journey! I look forward to sharing knowledge, insights, and discussions with all of you. Feel free to reach out with any questions or topics you'd like me to cover in future posts.
+## More to Come
+
+Thank you for joining me on this journey and I look forward to sharing more with you!
 
 Griffin McKnight
 
