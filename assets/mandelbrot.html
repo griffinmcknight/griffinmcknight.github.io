@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Mandelbrot Set</title>
+  <style>
+    body { 
+      margin: 0; 
+      background-color: black; 
+      position: relative; /* To position buttons relative to the body */
+      height: 100vh; /* Ensure body takes full viewport height */
+      overflow: hidden; /* Prevent scrollbars when in fullscreen */
+    }
+    canvas { 
+      display: block; 
+      width: 100vw; /* Full width */
+      height: 100vh; /* Full height */
+      cursor: pointer; /* Indicates interactivity */
+    }
+    /* Reset View Button Styles */
+    .reset-btn {
+      position: absolute;
+      top: 10px; /* Positioned at the top-right corner */
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      display: block; /* Always visible */
+      z-index: 1000;
+    }
+    .reset-btn:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="mandelbrotCanvas" aria-label="Interactive Mandelbrot Set"></canvas>
+  
+  <!-- Reset View Button -->
+  <button id="resetBtn" class="reset-btn" aria-label="Reset View">Reset View</button>
+  
+  <script>
+    const canvas = document.getElementById("mandelbrotCanvas");
+    const ctx = canvas.getContext("2d");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // Define the initial complex plane boundaries
+    const INITIAL_MIN_Y = -1.0;
+    const INITIAL_MAX_Y = 1.0;
+    const INITIAL_OFFSET_X = -0.5;
+    const INITIAL_OFFSET_Y = 0;
+    const INITIAL_ZOOM = 1;
+
+    let minY = INITIAL_MIN_Y;
+    let maxY = INITIAL_MAX_Y;
+    let offsetX = INITIAL_OFFSET_X;
+    let offsetY = INITIAL_OFFSET_Y;
+    let zoom = INITIAL_ZOOM;
+
+    let minX = minY * (window.innerWidth / window.innerHeight);
+    let maxX = maxY * (window.innerWidth / window.innerHeight);
+
+    // Mandelbrot settings
+    let maxIterations = 1500;
+
+    // Units per pixel (consistent for both axes)
+    let unitsPerPixel;
+
+    // Adjust DPI for sharper images on high-resolution displays
+    function adjustDPI() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    // Initialize the canvas size and calculate units per pixel
+    function initializeCanvas() {
+      // Set canvas size to full viewport
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
+      // Adjust DPI
+      adjustDPI();
+
+      // Update complex plane boundaries based on aspect ratio
+      const aspectRatio = window.innerWidth / window.innerHeight;
+      minX = - (maxY - minY) * aspectRatio / 2 + offsetX;
+      maxX = (maxY - minY) * aspectRatio / 2 + offsetX;
+
+      // Calculate units per pixel based on y-axis
+      unitsPerPixel = (maxY - minY) / window.innerHeight;
+
+      // Draw the Mandelbrot set
+      drawMandelbrot();
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      initializeCanvas();
+    });
+
+    // Prevent context menu on right-click
+    canvas.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+
+    // Mouse interaction for zooming via clicks
+    canvas.addEventListener('mousedown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // Calculate the coordinates in the Mandelbrot set
+      const newX = (mouseX - rect.width / 2) * unitsPerPixel + offsetX;
+      const newY = (rect.height / 2 - mouseY) * unitsPerPixel + offsetY;
+
+      if (e.button === 0) { // Left click to zoom in
+        zoom *= 1.5;
+        offsetX = newX;
+        offsetY = newY;
+        updateComplexPlane();
+        drawMandelbrot();
+      } else if (e.button === 2) { // Right click to zoom out
+        zoom /= 1.5;
+        offsetX = newX;
+        offsetY = newY;
+        updateComplexPlane();
+        drawMandelbrot();
+      }
+    });
+
+    // Rainbow color based on iteration count
+    function getColor(iteration) {
+      const ratio = Math.sqrt(iteration / maxIterations);
+      const hue = Math.floor(360 * ratio);
+      return `hsl(${hue}, 100%, 50%)`;
+    }
+
+    // Update complex plane boundaries based on zoom and offset
+    function updateComplexPlane() {
+      const aspectRatio = window.innerWidth / window.innerHeight;
+      const targetHeight = (INITIAL_MAX_Y - INITIAL_MIN_Y) / zoom;
+      const targetWidth = targetHeight * aspectRatio;
+
+      minY = offsetY - targetHeight / 2;
+      maxY = offsetY + targetHeight / 2;
+      minX = offsetX - targetWidth / 2;
+      maxX = offsetX + targetWidth / 2;
+
+      unitsPerPixel = (maxY - minY) / window.innerHeight;
+    }
+
+    // Draw Mandelbrot set
+    function drawMandelbrot() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      // Clear the canvas before drawing
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, width, height);
+
+      // Iterate over each pixel
+      for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
+          let zx = minX + x * unitsPerPixel;
+          let zy = maxY - y * unitsPerPixel; // Invert y-axis
+
+          let iteration = 0;
+          let cx = zx;
+          let cy = zy;
+
+          while (zx * zx + zy * zy < 4 && iteration < maxIterations) {
+            let xtemp = zx * zx - zy * zy + cx;
+            zy = 2 * zx * zy + cy;
+            zx = xtemp;
+            iteration++;
+          }
+
+          ctx.fillStyle = iteration === maxIterations ? "black" : getColor(iteration);
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+
+    // Reset view functionality
+    resetBtn.addEventListener('click', () => {
+      // Restore initial values
+      zoom = INITIAL_ZOOM;
+      offsetX = INITIAL_OFFSET_X;
+      offsetY = INITIAL_OFFSET_Y;
+      minY = INITIAL_MIN_Y;
+      maxY = INITIAL_MAX_Y;
+
+      // Recalculate minX and maxX based on initial aspect ratio
+      const aspectRatio = window.innerWidth / window.innerHeight;
+      minX = - (INITIAL_MAX_Y - INITIAL_MIN_Y) * aspectRatio / 2 + offsetX;
+      maxX = (INITIAL_MAX_Y - INITIAL_MIN_Y) * aspectRatio / 2 + offsetX;
+
+      // Recalculate units per pixel
+      unitsPerPixel = (maxY - minY) / window.innerHeight;
+
+      // Redraw the Mandelbrot set
+      drawMandelbrot();
+    });
+
+    // Initialize the canvas and draw the Mandelbrot set
+    initializeCanvas();
+  </script>
+</body>
+</html>
