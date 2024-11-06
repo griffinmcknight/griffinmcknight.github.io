@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Self-improving Memory"
+title: "Self-Improving Memory"
 date: 2024-11-06 00:00:01 -0400
 categories: [Artificial Intelligence]
 ---
